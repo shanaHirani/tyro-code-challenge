@@ -1,10 +1,11 @@
-package com.jetbrains.handson.mpp.tyrocodechallenge
+package com.jetbrains.handson.mpp.tyrocodechallenge.detailes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jetbrains.handson.mpp.tyrocodechallenge.R
 
 class DetailsFragment : Fragment() {
 
