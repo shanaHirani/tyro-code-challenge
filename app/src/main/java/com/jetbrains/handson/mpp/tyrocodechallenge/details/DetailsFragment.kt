@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.jetbrains.handson.mpp.tyrocodechallenge.R
+import com.jetbrains.handson.mpp.tyrocodechallenge.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
 
@@ -14,8 +16,14 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        val application = requireNotNull(activity).application
+        val binding = FragmentDetailsBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        /*val movie = DetailsFragmentArgs.fromBundle(arguments!!).selectedProperty
+        val viewModelFactory = DetailViewModelFactory(marsProperty, application)
+        binding.viewModel = ViewModelProvider(
+            this, viewModelFactory).get(DetailViewModel::class.java)*/
+        return binding.root
     }
 
 }
