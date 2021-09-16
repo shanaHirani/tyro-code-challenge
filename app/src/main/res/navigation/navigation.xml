@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/movieListFragment">
-
     <fragment
         android:id="@+id/movieListFragment"
-        android:name="com.jetbrains.handson.mpp.tyrocodechallenge.MovieListFragment"
+        android:name="com.jetbrains.handson.mpp.tyrocodechallenge.movieList.MovieListFragment"
         android:label="fragment_movie_list"
         tools:layout="@layout/fragment_movie_list" >
         <action
@@ -16,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.jetbrains.handson.mpp.tyrocodechallenge.DetailsFragment"
+        android:name="com.jetbrains.handson.mpp.tyrocodechallenge.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 </navigation>
