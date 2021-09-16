@@ -1,11 +1,14 @@
 package com.jetbrains.handson.mpp.tyrocodechallenge.movieList
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
 
 class MovieListViewModel: ViewModel() {
-    /*private val _status = MutableLiveData<MarsApiStatus>()
+    private val _status = MutableLiveData<MarsApiStatus>()
     val status: LiveData<MarsApiStatus>
         get() = _status
 
@@ -35,5 +38,5 @@ class MovieListViewModel: ViewModel() {
 
     fun updateFilter() {
 
-    }*/
+    }
 }
