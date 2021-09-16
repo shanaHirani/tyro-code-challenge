@@ -9,7 +9,7 @@ import com.jetbrains.handson.mpp.tyrocodechallenge.R
 
 class DetailsFragment : Fragment() {
 
-/////
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
