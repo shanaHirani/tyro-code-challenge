@@ -3,6 +3,7 @@ package com.jetbrains.handson.mpp.tyrocodechallenge.movieList
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jetbrains.handson.mpp.tyrocodechallenge.R
@@ -22,18 +23,17 @@ class MovieListFragment : Fragment() {
         val binding = FragmentMovieListBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.listMovie.adapter = MovieListAdapter()
-        /*binding.photosGrid.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
-            viewModel.displayPropertyDetails(it)
-        })*/
-        /*viewModel.navigateToSelectedProperty.observe(this, Observer {
+        binding.listMovie.adapter = MovieListAdapter(MovieListAdapter.OnClickListener{
+            viewModel.displayMovieDetails(it)
+        })
+
+        viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if ( null != it ) {
-                // Must find the NavController from the Fragment
-                this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
-                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
-                viewModel.displayPropertyDetailsComplete()
+                this.findNavController()
+                    .navigate(MovieListFragmentDirections.actionMovieListFragmentToDetailsFragment(it))
+                viewModel.displayMovieDetailsComplete()
             }
-        })*/
+        })
 
         setHasOptionsMenu(true)
         return binding.root

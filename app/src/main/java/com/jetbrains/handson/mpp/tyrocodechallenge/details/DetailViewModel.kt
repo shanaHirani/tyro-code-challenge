@@ -12,7 +12,6 @@ class DetailViewModel(movie: Movie, app: Application):ViewModel() {
     val selectedMovie: LiveData<Movie>
         get() = _selectedMovie
 
-    // Initialize the _selectedProperty MutableLiveData
     init {
         _selectedMovie.value = movie
     }

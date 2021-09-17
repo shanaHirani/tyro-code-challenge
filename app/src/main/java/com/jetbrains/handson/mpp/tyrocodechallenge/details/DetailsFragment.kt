@@ -19,10 +19,10 @@ class DetailsFragment : Fragment() {
         val application = requireNotNull(activity).application
         val binding = FragmentDetailsBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        /*val movie = DetailsFragmentArgs.fromBundle(arguments!!).selectedProperty
-        val viewModelFactory = DetailViewModelFactory(marsProperty, application)
+        val movie = DetailsFragmentArgs.fromBundle(requireArguments()!!).selectedMovie
+        val viewModelFactory = DetailViewModelFactory(movie, application)
         binding.viewModel = ViewModelProvider(
-            this, viewModelFactory).get(DetailViewModel::class.java)*/
+            this, viewModelFactory).get(DetailViewModel::class.java)
         return binding.root
     }
 

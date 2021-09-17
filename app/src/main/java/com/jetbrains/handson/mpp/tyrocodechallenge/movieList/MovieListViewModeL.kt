@@ -27,7 +27,7 @@ class MovieListViewModel: ViewModel() {
         get() = _movies
 
     private val _navigateToSelectedMovie = MutableLiveData<Movie>()
-    val navigateToSelectedProperty: LiveData<Movie>
+    val navigateToSelectedMovie: LiveData<Movie>
         get() = _navigateToSelectedMovie
 
     private val _response = MutableLiveData<String>()
@@ -59,7 +59,7 @@ class MovieListViewModel: ViewModel() {
         _navigateToSelectedMovie.value = movie
     }
 
-    fun displayPropertyDetailsComplete() {
+    fun displayMovieDetailsComplete() {
         _navigateToSelectedMovie.value = null
     }
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jetbrains.handson.mpp.tyrocodechallenge.databinding.MovieListItemBinding
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
 
-class MovieListAdapter: ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(DiffCallback) {
+class MovieListAdapter(val onClickListener: OnClickListener): ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback : DiffUtil.ItemCallback<Movie>() {
@@ -32,6 +32,9 @@ class MovieListAdapter: ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Dif
     override fun onBindViewHolder(holder: MovieListAdapter.MovieViewHolder, position: Int) {
         val movie = getItem(position)
         holder.bind(movie)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(movie)
+        }
     }
 
     class MovieViewHolder(private var binding: MovieListItemBinding):
@@ -40,5 +43,9 @@ class MovieListAdapter: ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Dif
             binding.movie = movie
             binding.executePendingBindings()
         }
+    }
+
+    class OnClickListener(val clickListener: (movie:Movie) -> Unit) {
+        fun onClick(movie:Movie) = clickListener(movie)
     }
 }
