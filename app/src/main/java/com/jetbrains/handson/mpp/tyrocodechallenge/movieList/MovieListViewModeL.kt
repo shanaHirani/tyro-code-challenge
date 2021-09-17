@@ -5,15 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieApi
+import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.await
 
-enum class MarsApiStatus { LOADING, ERROR, DONE }
+enum class ApiStatus { LOADING, ERROR, DONE }
 
 class MovieListViewModel: ViewModel() {
-    private val _status = MutableLiveData<MarsApiStatus>()
-    val status: LiveData<MarsApiStatus>
+    private val _status = MutableLiveData<ApiStatus>()
+    val status: LiveData<ApiStatus>
         get() = _status
 
     private val _movies = MutableLiveData<List<Movie>>()
@@ -28,6 +34,9 @@ class MovieListViewModel: ViewModel() {
     val response: LiveData<String>
         get() = _response
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
+
     init {
         getMovies()
     }
@@ -35,16 +44,16 @@ class MovieListViewModel: ViewModel() {
 
 
     private fun getMovies() {
-        MovieApi.retrofitService.getMovies().enqueue( object: Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                _response.value = "Failure: " + t.message
+            coroutineScope.launch {
+                try {
+                    var listResult = MovieApi.retrofitService.getMovies().await()
+                    _response.value = listResult.movieList?.get(1)?.imgURL
+                } catch (e: Exception) {
+                    _response.value = "Failure: ${e.message}"
+                }
             }
-
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
-            }
-        })
     }
+
 
     fun displayMovieDetails(movie: Movie) {
         _navigateToSelectedMovie.value = movie
@@ -56,5 +65,10 @@ class MovieListViewModel: ViewModel() {
 
     fun updateFilter() {
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
