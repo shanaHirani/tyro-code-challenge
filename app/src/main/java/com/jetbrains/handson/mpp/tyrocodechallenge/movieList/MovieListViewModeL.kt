@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
+import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieApi
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
 
@@ -31,7 +35,15 @@ class MovieListViewModel: ViewModel() {
 
 
     private fun getMovies() {
-        _response.value = "77"
+        MovieApi.retrofitService.getMovies().enqueue( object: Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                _response.value = "Failure: " + t.message
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                _response.value = response.body()
+            }
+        })
     }
 
     fun displayMovieDetails(movie: Movie) {
