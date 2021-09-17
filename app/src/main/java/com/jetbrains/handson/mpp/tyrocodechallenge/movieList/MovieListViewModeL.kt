@@ -46,7 +46,7 @@ class MovieListViewModel: ViewModel() {
     private fun getMovies() {
             coroutineScope.launch {
                 try {
-                    var listResult = MovieApi.retrofitService.getMovies().await()
+                    var listResult = MovieApi.retrofitService.getMovies("star wars").await()
                     _movies.value = listResult.movieList
                 } catch (e: Exception) {
                     _movies.value = ArrayList()

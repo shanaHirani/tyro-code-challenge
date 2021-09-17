@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val BASE_URL ="https://www.omdbapi.com/"
 
@@ -23,9 +24,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MovieApiService {
-    @GET("?apikey=320f6ab2&s=star%20wars")
-    fun getMovies():
+    @GET("?apikey=320f6ab2")
+    fun getMovies(@Query("s") searchTitle: String):
             Deferred<MovieList>
+
 }
 
 object MovieApi {
