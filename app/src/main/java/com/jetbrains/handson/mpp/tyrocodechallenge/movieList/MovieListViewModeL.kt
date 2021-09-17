@@ -47,9 +47,9 @@ class MovieListViewModel: ViewModel() {
             coroutineScope.launch {
                 try {
                     var listResult = MovieApi.retrofitService.getMovies().await()
-                    _response.value = listResult.movieList?.get(1)?.imgURL
+                    _movies.value = listResult.movieList
                 } catch (e: Exception) {
-                    _response.value = "Failure: ${e.message}"
+                    _movies.value = ArrayList()
                 }
             }
     }

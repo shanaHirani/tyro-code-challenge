@@ -22,6 +22,7 @@ class MovieListFragment : Fragment() {
         val binding = FragmentMovieListBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.listMovie.adapter = MovieListAdapter()
         /*binding.photosGrid.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })*/
@@ -37,7 +38,6 @@ class MovieListFragment : Fragment() {
         setHasOptionsMenu(true)
         return binding.root
 
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
 
   /*
