@@ -14,5 +14,6 @@ class MainActivity : AppCompatActivity() {
             this,
             R.layout.activity_main
         )
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
     }
 }
