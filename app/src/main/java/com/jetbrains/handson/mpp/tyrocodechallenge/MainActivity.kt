@@ -24,26 +24,4 @@ class MainActivity : AppCompatActivity() {
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
 
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
-        val inflater = menuInflater
-        inflater.inflate(R.menu.search_menu, menu)
-        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val search = menu?.findItem(R.id.search_movie)
-        val searchview = search?.actionView as SearchView
-        searchview.setSearchableInfo(manager.getSearchableInfo(componentName))
-        searchview.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchview.clearFocus()
-                searchview.setQuery("",false)
-                search.collapseActionView()
-                query?.let { Log.i("sss", it) }
-                return true
-            }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
-        return true
-    }
 }
