@@ -20,12 +20,18 @@ class MovieListViewModel: ViewModel() {
     val navigateToSelectedProperty: LiveData<Movie>
         get() = _navigateToSelectedMovie
 
+    private val _response = MutableLiveData<String>()
+    val response: LiveData<String>
+        get() = _response
+
     init {
         getMovies()
     }
 
-    private fun getMovies() {
 
+
+    private fun getMovies() {
+        _response.value = "77"
     }
 
     fun displayMovieDetails(movie: Movie) {
