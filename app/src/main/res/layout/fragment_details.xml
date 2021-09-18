@@ -91,6 +91,16 @@
             android:text="actor:"
             app:layout_constraintBottom_toTopOf="@+id/tx_actors"
             app:layout_constraintStart_toEndOf="@+id/im_poster" />
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:movieApiStatus="@{viewModel.status}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
