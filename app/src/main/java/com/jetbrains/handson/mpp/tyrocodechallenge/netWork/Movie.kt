@@ -10,7 +10,7 @@ data class MovieList(
 
 @Parcelize
 data class Movie(
-    @Json(name = "Title") val title: String?,
+    @Json(name = "Title") val title: String,
     @Json(name = "Year") val year: String?,
     @Json(name = "imdbID") val imdbID: String?,
     @Json(name = "Type") val type: String?,

@@ -24,9 +24,14 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MovieApiService {
+
     @GET("?apikey=320f6ab2")
     fun getMovies(@Query("s") searchTitle: String):
             Deferred<MovieList>
+
+    @GET("?apikey=320f6ab2")
+    fun getMovieDetail(@Query("t") searchTitle: String):
+            Deferred<MovieDetail>
 
 }
 

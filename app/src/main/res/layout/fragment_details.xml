@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
@@ -8,17 +9,88 @@
             type="com.jetbrains.handson.mpp.tyrocodechallenge.details.DetailViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/im_poster"
+            imageUrl="@{viewModel.selectedMovie.imgURL}"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tx_title_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{viewModel.selectedMovie.title}"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/im_poster"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tx_run_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.selectedMovie.title}"
-            tools:layout_editor_absoluteX="135dp"
-            tools:layout_editor_absoluteY="207dp" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="@{viewModel.selectedMovie.runtime}"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/im_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tx_title_detail" />
+
+        <TextView
+            android:id="@+id/tx_year_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:text="@{viewModel.selectedMovie.year}"
+            app:layout_constraintStart_toEndOf="@+id/tx_run_time"
+            app:layout_constraintTop_toBottomOf="@+id/tx_title_detail" />
+
+        <TextView
+            android:id="@+id/tx_actors"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{viewModel.selectedMovie.actors}"
+            app:layout_constraintBottom_toBottomOf="@+id/im_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/im_poster" />
+
+        <TextView
+            android:id="@+id/tx_plot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{viewModel.selectedMovie.plot}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/im_poster" />
+
+        <TextView
+            android:id="@+id/tx_actor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="actor:"
+            app:layout_constraintBottom_toTopOf="@+id/tx_actors"
+            app:layout_constraintStart_toEndOf="@+id/im_poster" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

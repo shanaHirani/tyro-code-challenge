@@ -6,14 +6,33 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
+import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieApi
+import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieDetail
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class DetailViewModel(movie: Movie, app: Application):ViewModel() {
-    private val _selectedMovie = MutableLiveData<Movie>()
-    val selectedMovie: LiveData<Movie>
+    private val _selectedMovie = MutableLiveData<MovieDetail>()
+    val selectedMovie: LiveData<MovieDetail>
         get() = _selectedMovie
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
+
     init {
-        _selectedMovie.value = movie
+       getMovieDetail(movie.title)
+    }
+
+    fun getMovieDetail(title:String) {
+        coroutineScope.launch {
+            try {
+                _selectedMovie.value = MovieApi.retrofitService.getMovieDetail(title).await()
+            } catch (e: Exception) {
+
+            }
+        }
     }
 }
 
