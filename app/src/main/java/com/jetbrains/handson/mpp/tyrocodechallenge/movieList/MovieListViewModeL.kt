@@ -19,6 +19,9 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
     val status: LiveData<ApiStatus>
         get() = _status
 
+    init {
+        _status.value = ApiStatus.DONE
+    }
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>>
         get() = _movies
@@ -27,17 +30,16 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
     val navigateToSelectedMovie: LiveData<Movie>
         get() = _navigateToSelectedMovie
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
-
     fun searchMovies(title:String) {
             viewModelScope.launch {
                 try {
+                    _status.value = ApiStatus.LOADING
                     var listResult = repository.getMovies(title).await()
                     _movies.value = listResult.movieList
+                    _status.value = ApiStatus.DONE
                 } catch (e: Exception) {
                     _movies.value = ArrayList()
+                    _status.value = ApiStatus.ERROR
                 }
             }
     }
