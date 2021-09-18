@@ -32,7 +32,7 @@ class DetailViewModel(movie: Movie, app: Application):ViewModel() {
             try {
                 _selectedMovie.value = MovieApi.retrofitService.getMovieDetail(title).await()
             } catch (e: Exception) {
-
+    //
             }
         }
     }
