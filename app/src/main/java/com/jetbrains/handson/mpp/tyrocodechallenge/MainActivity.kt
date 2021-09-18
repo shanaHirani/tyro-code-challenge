@@ -10,6 +10,8 @@ import android.view.MenuInflater
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.jetbrains.handson.mpp.tyrocodechallenge.databinding.ActivityMainBinding
 
 //
@@ -22,6 +24,12 @@ class MainActivity : AppCompatActivity() {
             R.layout.activity_main
         )
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        return navController.navigateUp()
     }
 }
