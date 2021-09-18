@@ -1,21 +1,24 @@
 package com.jetbrains.handson.mpp.tyrocodechallenge.details
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
 
 import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.MovieDetail
+import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailViewModel(movie: Movie, app: Application):ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor (
+    val repository: Repository,
+    var state: SavedStateHandle
+    ):ViewModel() {
     private val _selectedMovie = MutableLiveData<MovieDetail>()
     val selectedMovie: LiveData<MovieDetail>
         get() = _selectedMovie
@@ -24,21 +27,22 @@ class DetailViewModel(movie: Movie, app: Application):ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     init {
-       getMovieDetail(movie.title)
+        val movie= state.get<Movie>("selectedMovie")
+        movie?.let { getMovieDetail(it.title) }
     }
 
     fun getMovieDetail(title:String) {
         coroutineScope.launch {
             try {
-                _selectedMovie.value = MovieApi.retrofitService.getMovieDetail(title).await()
+                _selectedMovie.value = repository.getMovieDetail(title).await()
             } catch (e: Exception) {
-    //
+
             }
         }
     }
 }
 
-class DetailViewModelFactory(
+/*class DetailViewModelFactory(
     private val movie: Movie,
     private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
@@ -48,4 +52,4 @@ class DetailViewModelFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-}
+}*/
