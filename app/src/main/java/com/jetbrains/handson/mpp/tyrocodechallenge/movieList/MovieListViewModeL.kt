@@ -4,19 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
 import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.repository.Repository
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
-import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieList
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.await
 import javax.inject.Inject
 
 enum class ApiStatus { LOADING, ERROR, DONE }

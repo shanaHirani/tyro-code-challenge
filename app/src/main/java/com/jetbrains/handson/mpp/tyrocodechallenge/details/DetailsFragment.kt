@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.jetbrains.handson.mpp.tyrocodechallenge.R
 import com.jetbrains.handson.mpp.tyrocodechallenge.databinding.FragmentDetailsBinding
-import com.jetbrains.handson.mpp.tyrocodechallenge.movieList.MovieListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

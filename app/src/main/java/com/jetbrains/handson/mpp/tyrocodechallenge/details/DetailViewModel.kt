@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor (
         movie?.let { getMovieDetail(it.title) }
     }
 
-    fun getMovieDetail(title:String) {
+    private fun getMovieDetail(title:String) {
         viewModelScope.launch {
             try {
                 _selectedMovie.value = repository.getMovieDetail(title).await()
