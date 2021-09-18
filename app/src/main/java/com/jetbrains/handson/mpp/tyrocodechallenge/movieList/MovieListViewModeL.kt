@@ -3,6 +3,7 @@ package com.jetbrains.handson.mpp.tyrocodechallenge.movieList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
 import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.repository.Repository
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
@@ -39,12 +40,8 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
     val response: LiveData<String>
         get() = _response
 
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
-
-
     fun searchMovies(title:String) {
-            coroutineScope.launch {
+            viewModelScope.launch {
                 try {
                     var listResult = repository.getMovies(title).await()
                     _movies.value = listResult.movieList
@@ -63,12 +60,4 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
         _navigateToSelectedMovie.value = null
     }
 
-    fun updateFilter() {
-
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
 }
