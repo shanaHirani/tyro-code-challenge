@@ -1,15 +1,12 @@
-package com.jetbrains.handson.mpp.tyrocodechallenge.netWork
+package com.jetbrains.handson.mpp.tyrocodechallenge.API
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
+
 
 private const val BASE_URL ="https://www.omdbapi.com/"
 
@@ -22,18 +19,6 @@ private val retrofit = Retrofit.Builder()
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
-
-interface MovieApiService {
-
-    @GET("?apikey=320f6ab2")
-    fun getMovies(@Query("s") searchTitle: String):
-            Deferred<MovieList>
-
-    @GET("?apikey=320f6ab2")
-    fun getMovieDetail(@Query("t") searchTitle: String):
-            Deferred<MovieDetail>
-
-}
 
 object MovieApi {
     val retrofitService : MovieApiService by lazy {

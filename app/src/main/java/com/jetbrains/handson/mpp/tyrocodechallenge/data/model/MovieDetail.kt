@@ -1,4 +1,4 @@
-package com.jetbrains.handson.mpp.tyrocodechallenge.netWork
+package com.jetbrains.handson.mpp.tyrocodechallenge.data.model
 
 import com.squareup.moshi.Json
 

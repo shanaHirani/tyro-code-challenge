@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
-import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieApi
-import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieDetail
+
+import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.MovieDetail
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
