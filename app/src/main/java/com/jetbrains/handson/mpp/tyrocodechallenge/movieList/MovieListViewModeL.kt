@@ -46,7 +46,7 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
     fun searchMovies(title:String) {
             coroutineScope.launch {
                 try {
-                    var listResult = repository.getMovies(title).await()
+                    var listResult = repository.getMovies(title).await()////
                     _movies.value = listResult.movieList
                 } catch (e: Exception) {
                     _movies.value = ArrayList()
