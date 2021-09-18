@@ -9,6 +9,7 @@ import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
 
 import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.MovieDetail
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

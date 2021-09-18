@@ -13,8 +13,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.jetbrains.handson.mpp.tyrocodechallenge.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-//
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
