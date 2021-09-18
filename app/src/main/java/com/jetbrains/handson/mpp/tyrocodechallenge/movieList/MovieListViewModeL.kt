@@ -37,16 +37,11 @@ class MovieListViewModel: ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
-    init {
-        getMovies()
-    }
 
-
-
-    private fun getMovies() {
+    fun searchMovies(title:String) {
             coroutineScope.launch {
                 try {
-                    var listResult = MovieApi.retrofitService.getMovies("star wars").await()
+                    var listResult = MovieApi.retrofitService.getMovies(title).await()
                     _movies.value = listResult.movieList
                 } catch (e: Exception) {
                     _movies.value = ArrayList()

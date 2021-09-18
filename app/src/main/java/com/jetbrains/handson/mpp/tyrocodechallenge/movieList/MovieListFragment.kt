@@ -48,6 +48,7 @@ class MovieListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.search_menu, menu)
+        //val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val manager = requireActivity().getSystemService("search") as SearchManager
         val search = menu?.findItem(R.id.search_movie)
         val searchview = search?.actionView as SearchView
@@ -57,7 +58,7 @@ class MovieListFragment : Fragment() {
                 searchview.clearFocus()
                 searchview.setQuery("",false)
                 search.collapseActionView()
-                query?.let { Log.i("sss", it) }
+                query?.let {viewModel.searchMovies(query)}
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
