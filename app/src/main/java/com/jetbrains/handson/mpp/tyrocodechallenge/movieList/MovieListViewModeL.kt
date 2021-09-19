@@ -1,5 +1,6 @@
 package com.jetbrains.handson.mpp.tyrocodechallenge.movieList
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,6 +44,7 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
                 } catch (e: Exception) {
                     _movies.value = ArrayList()
                     _status.value = ApiStatus.ERROR
+                    Log.i("sss",e.message.toString())
                 }
             }
     }//

@@ -7,12 +7,12 @@ import retrofit2.http.Query
 
 interface MovieApiService {
 
-    @GET("?apikey=320f6ab2")
-    fun getMovies(@Query("s") searchTitle: String):
+    @GET("?")
+    fun getMovies(@Query("apikey") apikey: String , @Query("s") searchTitle: String):
             Deferred<MovieList>
 
-    @GET("?apikey=320f6ab2")
-    fun getMovieDetail(@Query("t") searchTitle: String):
+    @GET("?")
+    fun getMovieDetail(@Query("apikey") apikey: String,@Query("t") searchTitle: String):
             Deferred<MovieDetail>
 
 }
