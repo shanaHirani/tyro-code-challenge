@@ -70,11 +70,13 @@ fun bindStatus(statusTextView: TextView, status: ApiStatus?) {
         }
         ApiStatus.EMPTY_LISt -> {
             statusTextView.visibility = View.VISIBLE
-            statusTextView.text = "no Movie Found"
+            statusTextView.text = statusTextView.resources
+                .getString(R.string.no_Movie_Found)
         }
         ApiStatus.START -> {
             statusTextView.visibility = View.VISIBLE
-            statusTextView.text = "Please input your title in search"
+            statusTextView.text = statusTextView.resources
+                .getString(R.string.Please_input_your_title_in_search)
         }
 
     }

@@ -2,4 +2,8 @@
     <string name="app_name">Tyro Code Challenge</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="no_Movie_Found">no Movie Found</string>
+    <string name="Please_input_your_title_in_search">Please input your title in search:</string>
+    <string name="actor">actor:</string>
 </resources>
