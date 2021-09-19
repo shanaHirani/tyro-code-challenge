@@ -45,7 +45,7 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
                     _status.value = ApiStatus.ERROR
                 }
             }
-    }
+    }//
 
 
     fun displayMovieDetails(movie: Movie) {
