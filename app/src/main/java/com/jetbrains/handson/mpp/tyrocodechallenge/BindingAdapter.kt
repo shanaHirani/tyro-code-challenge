@@ -2,6 +2,7 @@ package com.jetbrains.handson.mpp.tyrocodechallenge
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -45,5 +46,36 @@ fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
         ApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
+        ApiStatus.EMPTY_LISt -> {
+            statusImageView.visibility = View.GONE
+        }
+        ApiStatus.START -> {
+            statusImageView.visibility = View.GONE
+        }
+
+    }
+}
+
+@BindingAdapter("movieApiStatus")
+fun bindStatus(statusTextView: TextView, status: ApiStatus?) {
+    when (status) {
+        ApiStatus.LOADING -> {
+            statusTextView.visibility = View.GONE
+        }
+        ApiStatus.ERROR -> {
+            statusTextView.visibility = View.GONE
+        }
+        ApiStatus.DONE -> {
+            statusTextView.visibility = View.GONE
+        }
+        ApiStatus.EMPTY_LISt -> {
+            statusTextView.visibility = View.VISIBLE
+            statusTextView.text = "no Movie Found"
+        }
+        ApiStatus.START -> {
+            statusTextView.visibility = View.VISIBLE
+            statusTextView.text = "Please input your title in search"
+        }
+
     }
 }

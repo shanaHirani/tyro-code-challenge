@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-enum class ApiStatus { LOADING, ERROR, DONE }
+enum class ApiStatus { START,EMPTY_LISt, LOADING, ERROR, DONE }
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor (val repository: Repository): ViewModel() {
@@ -20,7 +20,7 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
         get() = _status
 
     init {
-        _status.value = ApiStatus.DONE
+        _status.value = ApiStatus.START
     }
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>>
@@ -37,6 +37,9 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
                     var listResult = repository.getMovies(title).await()
                     _movies.value = listResult.movieList
                     _status.value = ApiStatus.DONE
+                    if (_movies.value?.size == 0 || _movies.value?.size == null ){
+                        _status.value = ApiStatus.EMPTY_LISt
+                    }
                 } catch (e: Exception) {
                     _movies.value = ArrayList()
                     _status.value = ApiStatus.ERROR
