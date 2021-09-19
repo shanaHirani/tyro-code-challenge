@@ -1,7 +1,6 @@
 package com.jetbrains.handson.mpp.tyrocodechallenge.di
 
 import com.jetbrains.handson.mpp.tyrocodechallenge.API.API
-import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.MovieApiService
 import dagger.Module
 import dagger.Provides

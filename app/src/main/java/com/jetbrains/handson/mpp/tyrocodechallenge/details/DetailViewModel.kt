@@ -1,51 +1,43 @@
 package com.jetbrains.handson.mpp.tyrocodechallenge.details
 
-import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.jetbrains.handson.mpp.tyrocodechallenge.API.MovieApi
+import androidx.lifecycle.*
 import com.jetbrains.handson.mpp.tyrocodechallenge.netWork.Movie
-
 import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.MovieDetail
+import com.jetbrains.handson.mpp.tyrocodechallenge.data.model.repository.Repository
+import com.jetbrains.handson.mpp.tyrocodechallenge.movieList.ApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailViewModel(movie: Movie, app: Application):ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor (
+    private val repository: Repository,
+    var state: SavedStateHandle
+    ):ViewModel() {
+
     private val _selectedMovie = MutableLiveData<MovieDetail>()
     val selectedMovie: LiveData<MovieDetail>
         get() = _selectedMovie
 
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
+    private val _status = MutableLiveData<ApiStatus>()
+    val status: LiveData<ApiStatus>
+        get() = _status
 
     init {
-       getMovieDetail(movie.title)
+        val movie= state.get<Movie>("selectedMovie")
+        movie?.let { getMovieDetail(it.title) }
+        _status.value = ApiStatus.LOADING
     }
 
-    fun getMovieDetail(title:String) {
-        coroutineScope.launch {
+    private fun getMovieDetail(title:String) {
+        viewModelScope.launch {
             try {
-                _selectedMovie.value = MovieApi.retrofitService.getMovieDetail(title).await()
+                _status.value = ApiStatus.LOADING
+                _selectedMovie.value = repository.getMovieDetail(title).await()
+                _status.value = ApiStatus.DONE
             } catch (e: Exception) {
-
+                _status.value = ApiStatus.ERROR
             }
         }
-    }
-}
-
-class DetailViewModelFactory(
-    private val movie: Movie,
-    private val application: Application) : ViewModelProvider.Factory {
-    @Suppress("unchecked_cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(movie, application) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class API @Inject constructor() {
     private val BASE_URL ="https://www.omdbapi.com/"
-
+    val apiKey ="320f6ab2"
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
