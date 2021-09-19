@@ -33,7 +33,7 @@ class DetailViewModel @Inject constructor (
         viewModelScope.launch {
             try {
                 _status.value = ApiStatus.LOADING
-                _selectedMovie.value = repository.getMovieDetail(title).await()
+                _selectedMovie.value = repository.getMovieDetail(title)
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

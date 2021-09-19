@@ -35,7 +35,7 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
             viewModelScope.launch {
                 try {
                     _status.value = ApiStatus.LOADING
-                    var listResult = repository.getMovies(title).await()
+                    var listResult = repository.getMovies(title)
                     _movies.value = listResult.movieList
                     _status.value = ApiStatus.DONE
                     if (_movies.value?.size == 0 || _movies.value?.size == null ){
