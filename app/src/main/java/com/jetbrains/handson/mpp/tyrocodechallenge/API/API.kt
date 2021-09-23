@@ -7,7 +7,9 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class API @Inject constructor() {
     private val BASE_URL ="https://www.omdbapi.com/"
     val apiKey ="320f6ab2"

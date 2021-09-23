@@ -18,7 +18,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val application = requireNotNull(activity).application
+
         val binding = FragmentDetailsBinding.inflate(inflater)
         binding.lifecycleOwner = this
         //val movie = DetailsFragmentArgs.fromBundle(requireArguments()!!).selectedMovie

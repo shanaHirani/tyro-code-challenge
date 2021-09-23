@@ -10,7 +10,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class appModule {
-
     @Provides
     fun provideMovieApi(api: API) : MovieApiService {
         return api.retrofit.create(MovieApiService::class.java)

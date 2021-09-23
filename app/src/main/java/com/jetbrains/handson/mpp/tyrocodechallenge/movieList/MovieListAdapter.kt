@@ -25,7 +25,8 @@ class MovieListAdapter(val onClickListener: OnClickListener): ListAdapter<Movie,
         parent: ViewGroup,
         viewType: Int
     ): MovieListAdapter.MovieViewHolder {
-        return MovieViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return MovieViewHolder(MovieListItemBinding
+            .inflate(LayoutInflater.from(parent.context),parent,false))
 
     }
 

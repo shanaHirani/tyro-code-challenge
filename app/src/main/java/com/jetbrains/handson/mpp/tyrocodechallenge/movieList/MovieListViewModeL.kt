@@ -23,6 +23,7 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
     init {
         _status.value = ApiStatus.START
     }
+
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>>
         get() = _movies
@@ -44,10 +45,9 @@ class MovieListViewModel @Inject constructor (val repository: Repository): ViewM
                 } catch (e: Exception) {
                     _movies.value = ArrayList()
                     _status.value = ApiStatus.ERROR
-                    Log.i("sss",e.message.toString())
                 }
             }
-    }//
+    }
 
 
     fun displayMovieDetails(movie: Movie) {

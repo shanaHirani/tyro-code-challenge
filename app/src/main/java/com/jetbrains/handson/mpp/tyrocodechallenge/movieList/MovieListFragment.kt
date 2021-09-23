@@ -39,7 +39,6 @@ class MovieListFragment : Fragment() {
 
         setHasOptionsMenu(true)
         return binding.root
-
     }
 
 
