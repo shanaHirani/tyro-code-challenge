@@ -15,16 +15,16 @@ import org.junit.Assert.*
 
 class RepositoryTest {
     lateinit var mockDataSource:RemoteDataSource
-    lateinit var movieList:MovieList
-    lateinit var repository:Repository
+    lateinit var mockMovieList:MovieList
+    lateinit var mockRepository:Repository
     @Before
     fun setUp() {
 
         mockDataSource = mockk()
-        movieList = mockk()
-        repository = Repository(mockDataSource)
+        mockMovieList = mockk()
+        mockRepository = Repository(mockDataSource)
         coEvery { mockDataSource.getMovies("heo;i wars") } throws Exception()
-        coEvery { mockDataSource.getMovies("star wars") } returns  movieList
+        coEvery { mockDataSource.getMovies("star wars") } returns  mockMovieList
     }
 
     @After
@@ -44,7 +44,7 @@ class RepositoryTest {
     @Test
     fun getMovies_when_success() {
         runBlocking {
-            Truth.assertThat(repository.getMovies("star wars")).isEqualTo(movieList)
+            Truth.assertThat(mockRepository.getMovies("star wars")).isEqualTo(mockMovieList)
         }
     }
 
